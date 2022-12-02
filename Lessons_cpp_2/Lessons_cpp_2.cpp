@@ -1,19 +1,18 @@
 ﻿#include <iostream> 
 using namespace std;
 
-int* Sum(int a, int b) {
-	int* dinamic = new int;
-	*dinamic = a + b;
-	return dinamic;
-}
+
 int main()
 {
-	int a, b;
-	cin >> a >> b;
-	int* barbecue = Sum(a, b);
-	cout << *barbecue << endl;
-
-	delete barbecue;
-
+	int size = 5;
+	cin >> size;
+	int* arr = new int [size];
+	for (int i = 0; i < size; i++)
+	{
+		arr[i]= 0;
+		cout << arr[i] << endl;
+	}
+	delete [] arr;
 	return 0;
 }
+
