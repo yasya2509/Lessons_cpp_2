@@ -1,44 +1,50 @@
-﻿#include <iostream> 
+﻿#include <iostream>
 
 using namespace std;
 
-int* Creater(int size)
+int** FillTArr(int str, int stolb)
 {
-	int* arr = new int[size];
-	for (int i = 0; i < size; i++)
-	{
-		arr[i] = 0;
-	}
-	return arr;
+    int** arr = new int* [str];
+    for (int i = 0; i < str; ++i)
+    {
+        arr[i] = new int[stolb];
+    }
+    for (int i = 0; i < str; ++i)
+    {
+        for (int j = 0; j < stolb; ++j)
+        {
+            arr[i][j] = 0;
+        }
+    }
+    return arr;
+ }
+
+void Print(int** arr, int str, int stolb)
+{
+    for (int i = 0; i < str; ++i) 
+    {
+        for (int j = 0; j < stolb; ++j)
+        {
+            cout << arr[i][j] << ' ';
+        }
+        cout << endl;
+    }
 }
 
-void Print(int* arr, int size)
+void DelArr(int** arr, int str, int stolb)
 {
-	for (int i = 0; i < size; i++)
-	{
-		cout << arr[i] << endl;
-	}
+    for (int i = 0; i < str; ++i) {
+        delete[] arr[i];
+    }
+    delete[] arr;
 }
 
-int* SumArr(int* arr1,int* arr2, int size)
-{
-	int* ARR = Creater(size);
-	for (int i = 0; i < size; ++i)
-	{
-		ARR[i] = arr1[i] + arr2[i];
-	}
-	return ARR;
+int main() {
+    int str = 5;
+    int stolb = 7;
+    int** arr = FillTArr(str, stolb);
+    Print(arr, str, stolb);
+    DelArr(arr, str, stolb);
+
+    return 0;
 }
-
-int main()
-{
-	const int size = 5;
-	int arr1[size] = { 1,2,3,4,5 };
-	int arr2[size] = { 9,8,7,6,5 };
-	int* sum = SumArr(arr1, arr2, size);
-	Print(sum, size);
-	delete[] sum;
-	return 0;
-
-}
-
