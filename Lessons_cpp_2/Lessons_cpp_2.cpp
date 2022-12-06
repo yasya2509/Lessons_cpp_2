@@ -1,50 +1,30 @@
-﻿#include <iostream>
-
+﻿#include <iostream> 
 using namespace std;
 
-int** FillTArr(int str, int stolb)
+int main()
 {
-    int** arr = new int* [str];
-    for (int i = 0; i < str; ++i)
-    {
-        arr[i] = new int[stolb];
-    }
-    for (int i = 0; i < str; ++i)
-    {
-        for (int j = 0; j < stolb; ++j)
-        {
-            arr[i][j] = 0;
-        }
-    }
-    return arr;
- }
+    const int size_1 = 2;
+    const int size_2 = 2;
+ 
+    int arr_first[size_1][size_2] = {
+        {1,2},
+        {2,9}
+    };
+    int arr_second[size_1][size_2] = {
+        {9,8},
+        {8,1}
+    };
 
-void Print(int** arr, int str, int stolb)
-{
-    for (int i = 0; i < str; ++i) 
-    {
-        for (int j = 0; j < stolb; ++j)
-        {
-            cout << arr[i][j] << ' ';
+   
+
+    for (int i = 0; i < size_1; ++i) {
+        for (int j = 0; j < size_2; ++j) {
+
+            arr_first[i][j] += arr_second[i][j];
+            cout << arr_first[i][j] << ' ';
         }
         cout << endl;
-    }
-}
+    } 
 
-void DelArr(int** arr, int str, int stolb)
-{
-    for (int i = 0; i < str; ++i) {
-        delete[] arr[i];
-    }
-    delete[] arr;
-}
-
-int main() {
-    int str = 5;
-    int stolb = 7;
-    int** arr = FillTArr(str, stolb);
-    Print(arr, str, stolb);
-    DelArr(arr, str, stolb);
-
-    return 0;
+	return 0;
 }
