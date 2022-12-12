@@ -1,7 +1,7 @@
 ﻿#include <iostream> 
 using namespace std;
 
-int** FillTArr(int str, int stolb)
+int** CreateArr(int str, int stolb)
 {
     int** arr = new int* [str];
     for (int i = 0; i < str; ++i)
@@ -23,18 +23,16 @@ void Print(int** arr, int str, int stolb)
     }
 }
 
-int** SumArr(int str, int stolb, int size_1, int size_2, int** arr_first, int** arr_second)
+int** SumArr(int str, int stolb, int** dinamic_arr_first, int** dinamic_arr_second)
 {
-    int** arr = FillTArr(str, stolb);
-    for (int i = 0; i < size_1; ++i) 
+    int** arr = CreateArr(str, stolb);
+    for (int i = 0; i < str; ++i)
     {
-        for (int j = 0; j < size_2; ++j)
+        for (int j = 0; j < stolb; ++j)
         {
-
-           arr[i][j] = arr_first[i][j] + arr_second[i][j];
-            cout << arr << ' ';
+            arr[i][j] = dinamic_arr_first[i][j] + dinamic_arr_second[i][j];
+            
         }
-        cout << endl;
     }
     return arr;
 }
@@ -44,28 +42,49 @@ void DelArr(int** arr, int str, int stolb)
     for (int i = 0; i < str; ++i) {
         delete[] arr[i];
     }
+
     delete[] arr;
 }
 
 int main()
 {
-    int str = 5;
-    int stolb = 7;
-    const int size_1 = 2;
-    const int size_2 = 2;
- 
-    int arr_first[size_1][size_2] = {
-        {1,2},
-        {2,9}
-    };
-    int arr_second[size_1][size_2] = {
-        {9,8},
-        {8,1}
-    };
+    // посмотри внимательнее на переменные ниже
+    const int str = 2;
+    const int stolb = 4;
+    //const int size_1 = 2;
+    
+    int arr_first[str][stolb] = {
+        {1,2,3,5},
+        {2,9,6,7}
 
-    int** sum = SumArr(str, stolb, size_1, size_2, arr_first, arr_second);
+    };
+    int arr_second[str][stolb] = {
+        {9,8,7,5},
+        {8,1,4,3}
+    };
+    
+
+    // Это делается для того, чтобы передать матрицу в функцию
+    int** dinamic_arr_first = CreateArr(str, stolb);
+    for (int i = 0; i < str; ++i) {
+        for (int j = 0; j < stolb; ++j) {
+            dinamic_arr_first[i][j] = arr_first[i][j];
+        }
+    }
+    int** dinamic_arr_second = CreateArr(str, stolb);
+    for (int i = 0; i < str; ++i) {
+        for (int j = 0; j < stolb; ++j) {
+            dinamic_arr_second[i][j] = arr_second[i][j];
+        }
+    }
+
+    // и вот тут подумай какие из переменных тебе не нужно передавать
+    int** sum = SumArr(str, stolb, dinamic_arr_first, dinamic_arr_second);
     Print(sum, str, stolb);
     DelArr(sum, str, stolb);
 
-	return 0;
-}
+    DelArr(dinamic_arr_first, str, stolb);
+    DelArr(dinamic_arr_second, str, stolb);
+
+    return 0;
+}  
