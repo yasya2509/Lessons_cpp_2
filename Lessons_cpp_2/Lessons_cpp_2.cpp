@@ -1,32 +1,18 @@
 ﻿#include <iostream> 
 #include <cassert> 
-
+#include <vector>
 using namespace std;
 
-int Factorial(int value) {
-	if (value < 0) {
-		return 0;
+int main()
+{
+	vector<int> first(5, 5);
+	vector<int> second(5, 5);
+	vector<int> third(5);
+	for (int i = 0; i < first.size(); i++) {
+		third[i] = first[i] + second[i];
+		cout << third[i] << endl;
 	}
-
-	int fact = 1;
-	for (int i = 1; i <= value; i++) {
-		fact *= i;
-	}
-    
-	return fact;
-}
-
-void Test() {
-	assert(Factorial(3) == 6);
-	assert(Factorial(1) == 1);
-	assert(Factorial(0) == 1);
-	assert(Factorial(-2) == 0);
-
-}
-
-int main() {
-
-	Test();
-
+	third.push_back(1);
+	cout << third.size() << endl;
 	return 0;
 }
