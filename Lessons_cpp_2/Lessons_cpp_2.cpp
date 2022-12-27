@@ -7,38 +7,48 @@
 using namespace std;
 
 // symbol - искомый символ в строке
-string FindSymbol(const string& text, char symbol)
+string FindVowels(const string& text)
 {
+    string vowels = "aeiouy";
     string box;
-    for (size_t i = 0; i < text.size(); ++i)
-    {
-        if (text[i] == symbol)
-        {
-            box.push_back(text[i]);
+    for (size_t i = 0; i < text.size(); ++i) {
+        for (size_t j = 0; j < vowels.size(); ++j) {
+            if (text[i] == vowels[j])
+            {
+                box.push_back(text[i]);
+                break;
+            }
         }
     }
+
+    
     // составляет строку из искомых символов
     return box;
 }
 
 void Test() {
-    string text = "aosgpenamllaskhksjdfaahrda"s;
     {
-        string result = FindSymbol(text, 'a');
-        assert(result.size() == 6);
-        assert(result == "aaaaaa"s);
+        string text = "aosgpenamllaskhksjdfaahrda"s;
+        string result = FindVowels(text);
+        assert(result.size() == 8);
+        assert(result == "aoeaaaaa"s);
     }
     {
-        string result = FindSymbol(text, 's');
-        assert(result.size() == 3);
-        assert(result == "sss"s);
+        string text = "hthsgnmbvrtpz"s;
+        string result = FindVowels(text);
+        assert(result.size() == 0);
+        assert(result.empty());
+    }
+    {
+        string text = "aeiouyie"s;
+        string result = FindVowels(text);
+        assert(result.size() == 8);
+        assert(result == "aeiouyie"s);
     }
 }
 
 int main() {
     Test();
-    string text = "aosgpenamllaskhksjdfaahrda"s;
-    string result = FindSymbol(text, 'a');
-    cout << result << endl;
+    cout << FindVowels("avhskdourtabxaagsuw") << endl;
     return 0;
 }
