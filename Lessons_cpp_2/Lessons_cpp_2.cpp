@@ -1,54 +1,49 @@
-﻿
+﻿/*******************************************************************************
+	Задание: написать функцию, которая разделяет слова одной строки и складывает
+	каждое слово в вектор (вектор строк). Слова разделяются только ОДНИМ пробелом,
+	без запятых, точек и т.д. Могут существовать слова, состоящие из одной буквы
+	Если строка пустая, то вектор тоже должен был пустым.
+*******************************************************************************/
+
 #include <iostream>
 #include <cassert>
-#include <vector>
 #include <string>
+#include <vector>
 
 using namespace std;
 
-// symbol - искомый символ в строке
-string FindVowels(const string& text)
+// написать реализацию функции
+vector<string> ParseText(string text) 
 {
-    string vowels = "aeiouy";
-    string box;
-    for (size_t i = 0; i < text.size(); ++i) {
-        for (size_t j = 0; j < vowels.size(); ++j) {
-            if (text[i] == vowels[j])
-            {
-                box.push_back(text[i]);
-                break;
-            }
-        }
-    }
-
-    
-    // составляет строку из искомых символов
-    return box;
+	string vovels = "Hello Google my name is Slava I am coder c++";
+	string box;
+	for (size_t i = 0; i < text.size(); ++i) {
+		if (text[i] == ' ') {
+			box.push_back(text[i]);
+		}
+	}
+	cout << endl;
 }
-
 void Test() {
-    {
-        string text = "aosgpenamllaskhksjdfaahrda"s;
-        string result = FindVowels(text);
-        assert(result.size() == 8);
-        assert(result == "aoeaaaaa"s);
-    }
-    {
-        string text = "hthsgnmbvrtpz"s;
-        string result = FindVowels(text);
-        assert(result.size() == 0);
-        assert(result.empty());
-    }
-    {
-        string text = "aeiouyie"s;
-        string result = FindVowels(text);
-        assert(result.size() == 8);
-        assert(result == "aeiouyie"s);
-    }
+	{
+		string text = "First"s;
+		vector<string> result = { "First"s };
+		assert(ParseText(text) == result);
+	}
+	{
+		string text = "Hello Google my name is Slava I am coder c++"s;
+		vector<string> result = {"Hello"s, "Google"s, "my"s, "name"s, "is"s, "Slava"s, "I"s, "am"s, "coder"s, "c++"s};
+		assert(ParseText(text) == result);
+	}
+	{
+		string text;
+		vector<string> result = ParseText(text);
+		assert(result.empty());
+	}
 }
 
 int main() {
-    Test();
-    cout << FindVowels("avhskdourtabxaagsuw") << endl;
-    return 0;
+	Test();
+	ParseText("Hello Google my name is Slava I am coder c++");
+	return 0;
 }
