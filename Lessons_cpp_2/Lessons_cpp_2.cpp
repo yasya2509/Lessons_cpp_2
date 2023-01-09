@@ -12,38 +12,40 @@
 
 using namespace std;
 
-// написать реализацию функции
-vector<string> ParseText(string text) 
+// функция создает вектор count копий принятой строки 
+vector<string> CopyString(const string& text, size_t count)
 {
-	string vovels = "Hello Google my name is Slava I am coder c++";
-	string box;
-	for (size_t i = 0; i < text.size(); ++i) {
-		if (text[i] == ' ') {
-			box.push_back(text[i]);
-		}
+	vector<string> result(count);
+	for (size_t i = 0; i < result.size(); ++i) {
+		result[i] = text;
 	}
-	cout << endl;
+	return result;
 }
+
 void Test() {
-	{
-		string text = "First"s;
-		vector<string> result = { "First"s };
-		assert(ParseText(text) == result);
+
+	string text = "Happy New Year"s;
+	size_t  box = 5;
+	vector<string> copies = CopyString(text,box);
+	assert(box == copies.size());
+	for (size_t i = 0; i < copies.size(); ++i) {
+		assert(copies[i] == text);
 	}
-	{
-		string text = "Hello Google my name is Slava I am coder c++"s;
-		vector<string> result = {"Hello"s, "Google"s, "my"s, "name"s, "is"s, "Slava"s, "I"s, "am"s, "coder"s, "c++"s};
-		assert(ParseText(text) == result);
-	}
-	{
-		string text;
-		vector<string> result = ParseText(text);
-		assert(result.empty());
-	}
+
+	box = 0;
+	copies = CopyString(text, box);
+	assert(copies.empty());
 }
+
+
+
+
+
+
+
 
 int main() {
 	Test();
-	ParseText("Hello Google my name is Slava I am coder c++");
+	
 	return 0;
 }
